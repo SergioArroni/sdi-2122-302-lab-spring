@@ -28,10 +28,10 @@ public class ProfessorService {
     }
 
     public void editProfessor(Professor Professor) {
-        if (Professor.getId() != null) {
-            deleteProfessor(Professor.getId());
-            addProfessor(Professor);
+        if(professorRepository.existsById(Professor.getId())){
+            professorRepository.save(Professor);
         }
+
     }
 
     public void deleteProfessor(Long id) {
