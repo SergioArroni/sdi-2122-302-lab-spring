@@ -1,37 +1,30 @@
 package com.example.sdi212202spring.service;
 
 import com.example.sdi212202spring.entities.Professor;
+import com.example.sdi212202spring.repository.ProfessorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProfessorService {
 
-    private List<Professor> professorList = new LinkedList<>();
-
-    @PostConstruct
-    public void init() {
-        professorList.add(new Professor(1L, "000000A", "Juan", "Cueva", "Malvado"));
-        professorList.add(new Professor(2L, "000000B", "Dario", "Alvarez", "Graciosillo"));
-        professorList.add(new Professor(3L, "000000C", "Cristina", "Pelayo", "Exigente"));
-    }
+    @Autowired
+    private ProfessorRepository professorRepository;
 
     public List<Professor> getProfessor() {
-        return professorList;
+        List<Professor> professors = new ArrayList<Professor>();
+        professorRepository.findAll().forEach(professors::add);
+        return professors;
     }
 
     public Professor getProfessor(Long id) {
-        return professorList.stream().filter(professor -> professor.getId().equals(id)).findFirst().get();
+        return professorRepository.findById(id).get();
     }
 
-    public void addProfessor(Professor Professor) {
-        if (Professor.getId() == null) {
-            Professor.setId(professorList.get(professorList.size() - 1).getId() + 1);
-        }
-        professorList.add(Professor);
+    public void addProfessor(Professor professor) { // Si en Id es null le asignamos el último + 1 de la lista
+        professorRepository.save(professor);
     }
 
     public void editProfessor(Professor Professor) {
@@ -39,10 +32,9 @@ public class ProfessorService {
             deleteProfessor(Professor.getId());
             addProfessor(Professor);
         }
-
     }
 
     public void deleteProfessor(Long id) {
-        professorList.removeIf(professor -> professor.getId().equals(id));
+        professorRepository.deleteById(id);
     }
 }

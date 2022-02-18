@@ -37,7 +37,7 @@ public class ProfessorController {
         return "OK";
     }
 
-    @RequestMapping("/professor/edit")
+    @RequestMapping("/professor/edit/{id}")
     public String getEdit(@PathVariable Long id) {
         return ProfessorsService.getProfessor(id).toString();
     }
