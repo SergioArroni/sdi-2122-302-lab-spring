@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue
@@ -12,7 +13,10 @@ public class User {
     private String dni;
     private String name;
     private String lastName;
-    private String role;
+    private String password;
+    @Transient //propiedad que no se almacena e la tabla.
+    private String passwordConfirm;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Mark> marks;
 
@@ -64,6 +68,22 @@ public class User {
 
     public void setMarks(Set<Mark> marks) {
         this.marks = marks;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
     public String getFullName() {
