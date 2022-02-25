@@ -4,6 +4,7 @@ package com.example.sdi212202spring.controllers;
 import com.example.sdi212202spring.entities.User;
 import com.example.sdi212202spring.service.SecurityService;
 import com.example.sdi212202spring.service.UsersService;
+import com.example.sdi212202spring.validators.EditUserFormValidator;
 import com.example.sdi212202spring.validators.SignUpFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class UsersController {
     @Autowired
     private SignUpFormValidator signUpFormValidator;
+
+    @Autowired
+    private EditUserFormValidator editFormValidator;
 
     @Autowired
     private UsersService usersService;
@@ -66,7 +70,13 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
-    public String setEdit(@ModelAttribute User user, @PathVariable Long id) {
+    public String setEdit(@Validated User user, @PathVariable Long id, BindingResult result) {
+
+        editFormValidator.validate(user, result);
+        if (result.hasErrors()) {
+            return "/user/edit";
+        }
+
         User originalUser = usersService.getUser(id);
         if (user.getDni() != null)
             originalUser.setDni(user.getDni());

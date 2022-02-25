@@ -15,7 +15,7 @@ public class Mark {
     @JoinColumn(name = "user_id")
     private User user;
 
-    protected Mark() {
+    public Mark() {
     }
 
     public Mark(Long id, String description, Double score) {

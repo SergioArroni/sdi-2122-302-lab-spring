@@ -8,13 +8,14 @@
 
 <div class="container">
     <h2>Editar Nota</h2>
-    <form class="form-horizontal" method="post" th:action="${'/user/edit/' + user.id}">
+    <form class="form-horizontal" method="post" th:action="${'/user/edit/' + user.id}" th:object="${user}">
         <div class="form-group">
             <label class="control-label col-sm-2" for="dni">DNI:</label>
             <div class="col-sm-10">
                 <input th:value="${user.dni}" type="text" id="dni" class="form-control"
                        name="dni" placeholder="45554545A" required="true"/>
             </div>
+            <span class="text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></span>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="name">Nombre:</label>
@@ -22,6 +23,7 @@
                 <input th:value="${user.name}" type="text" id="name" class="form-control"
                        name="name" placeholder="Manue" required="true"/>
             </div>
+            <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="lastName">Apellidos:</label>
@@ -29,6 +31,7 @@
                 <input th:value="${user.lastName}" type="text" id="lastName" class="form-control"
                        name="lastName" placeholder="El Cordobe" required="true"/>
             </div>
+            <span class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
