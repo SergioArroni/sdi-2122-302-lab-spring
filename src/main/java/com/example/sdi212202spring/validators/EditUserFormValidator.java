@@ -26,7 +26,8 @@ public class EditUserFormValidator implements Validator {
             errors.rejectValue("dni", "Error.signup.dni.length");
         }
         if (!usersService.getUser(user.getId()).getDni().equals(user.getDni())) {
-            errors.rejectValue("dni", "Error.signup.dni.duplicate");
+            if(usersService.getUserByDni(user.getDni()) != null)
+                 errors.rejectValue("dni", "Error.signup.dni.duplicate");
         }
         if (user.getName().length() < 5 || user.getName().length() > 24) {
             errors.rejectValue("name", "Error.signup.name.length");
