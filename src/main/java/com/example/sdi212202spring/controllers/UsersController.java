@@ -5,9 +5,7 @@ import com.example.sdi212202spring.entities.User;
 import com.example.sdi212202spring.service.SecurityService;
 import com.example.sdi212202spring.service.UsersService;
 import com.example.sdi212202spring.validators.SignUpFormValidator;
-import com.sun.xml.bind.api.Bridge;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.BridgeMethodResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -68,8 +66,15 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
-    public String setEdit(Model model, @PathVariable Long id, @ModelAttribute User user) {
-        usersService.addUser(user);
+    public String setEdit(@ModelAttribute User user, @PathVariable Long id) {
+        User originalUser = usersService.getUser(id);
+        if (user.getDni() != null)
+            originalUser.setDni(user.getDni());
+        if (user.getName() != null)
+            originalUser.setName(user.getName());
+        if (user.getLastName() != null)
+            originalUser.setLastName(user.getLastName());
+        usersService.editUser(originalUser);
         return "redirect:/user/details/" + id;
     }
 
@@ -104,6 +109,12 @@ public class UsersController {
     public String signup(Model model) {
         model.addAttribute("user", new User());
         return "signup";
+    }
+
+    @RequestMapping("/user/list/update")
+    public String updateList(Model model) {
+        model.addAttribute("usersList", usersService.getUsers());
+        return "user/list :: tableUsers";
     }
 
 }

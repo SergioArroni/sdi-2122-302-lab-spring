@@ -1,6 +1,7 @@
 package com.example.sdi212202spring.service;
 
 import com.example.sdi212202spring.entities.Professor;
+import com.example.sdi212202spring.entities.User;
 import com.example.sdi212202spring.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,9 @@ public class ProfessorService {
 
     public void deleteProfessor(Long id) {
         professorRepository.deleteById(id);
+    }
+
+    public Professor getProfessorByDni(String dni) {
+        return professorRepository.findByDni(dni);
     }
 }

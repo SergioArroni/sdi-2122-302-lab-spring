@@ -12,7 +12,7 @@ public class Mark {
     private Double score;
 
     @ManyToOne
-    @JoinColumn(name = "iser_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     protected Mark() {

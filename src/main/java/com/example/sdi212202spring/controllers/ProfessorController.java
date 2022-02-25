@@ -1,12 +1,9 @@
 package com.example.sdi212202spring.controllers;
 
 
-import com.example.sdi212202spring.entities.Mark;
 import com.example.sdi212202spring.entities.Professor;
 import com.example.sdi212202spring.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

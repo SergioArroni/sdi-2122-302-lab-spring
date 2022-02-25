@@ -10,7 +10,7 @@ public class Professor {
     @Id
     @GeneratedValue
     private Long id;
-    private String Dni;
+    private String dni;
     private String Nombre;
     private String Apellidos;
     private String Categoría;
@@ -18,9 +18,9 @@ public class Professor {
     public Professor() {
     }
 
-    public Professor(Long id, String Dni, String Nombre, String Apellidos, String Categoría) {
+    public Professor(Long id, String dni, String Nombre, String Apellidos, String Categoría) {
         this.id = id;
-        this.Dni = Dni;
+        this.dni = dni;
         this.Nombre = Nombre;
         this.Apellidos = Apellidos;
         this.Categoría = Categoría;
@@ -35,7 +35,7 @@ public class Professor {
     }
 
     public String getDni() {
-        return Dni;
+        return dni;
     }
 
     public String getNombre() {
@@ -51,7 +51,7 @@ public class Professor {
     }
 
     public void setDni(String dni) {
-        Dni = dni;
+        dni = dni;
     }
 
     public void setNombre(String nombre) {
@@ -70,7 +70,7 @@ public class Professor {
     public String toString() {
         return "Professor{" +
                 "id=" + id +
-                ", Dni='" + Dni + '\'' +
+                ", Dni='" + dni + '\'' +
                 ", Nombre='" + Nombre + '\'' +
                 ", Apellidos='" + Apellidos + '\'' +
                 ", Categoría='" + Categoría + '\'' +
