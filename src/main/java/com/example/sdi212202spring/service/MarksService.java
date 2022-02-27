@@ -1,6 +1,7 @@
 package com.example.sdi212202spring.service;
 
 import com.example.sdi212202spring.entities.Mark;
+import com.example.sdi212202spring.entities.User;
 import com.example.sdi212202spring.repository.MarksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -59,4 +60,16 @@ public class MarksService {
             marksRepository.updateResend(revised, id);
         }
     }
+
+    public List<Mark> getMarksForUser(User user) {
+        List<Mark> marks = new ArrayList<Mark>();
+        if (user.getRole().equals("ROLE_STUDENT")) {
+            marks = marksRepository.findAllByUser(user);
+        }
+        if (user.getRole().equals("ROLE_PROFESSOR")) {
+            marks = getMarks();
+        }
+        return marks;
+    }
+
 }
