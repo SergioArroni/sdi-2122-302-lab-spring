@@ -24,6 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+
+
     @Bean
     public SpringSecurityDialect securityDialect() {
         return new SpringSecurityDialect();

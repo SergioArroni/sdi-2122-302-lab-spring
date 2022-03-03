@@ -4,15 +4,14 @@ import com.example.sdi212202spring.entities.Mark;
 import com.example.sdi212202spring.entities.User;
 import com.example.sdi212202spring.repository.MarksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Pageable;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MarksService {
@@ -26,13 +25,12 @@ public class MarksService {
         this.httpSession = httpSession;
     }
 
-    public List<Mark> getMarks() {
-        List<Mark> marks = new ArrayList<Mark>();
-        marksRepository.findAll().forEach(marks::add);
+    public Page<Mark> getMarks(Pageable pageable) {
+        Page<Mark> marks = marksRepository.findAll(pageable);
         return marks;
     }
 
-    public Mark getMark(Long id) {
+    public Mark getMark( Long id) {
         Set<Mark> consultedList = (Set<Mark>) httpSession.getAttribute("consultedList");
         if (consultedList == null) {
             consultedList = new HashSet<Mark>();
@@ -43,12 +41,12 @@ public class MarksService {
         return obtainedMark;
     }
 
-    public void addMark(Mark mark) {
+    public void addMark( Mark mark) {
         // Si en Id es null le asignamos el último + 1 de la lista
         marksRepository.save(mark);
     }
 
-    public void deleteMark(Long id) {
+    public void deleteMark( Long id) {
         marksRepository.deleteById(id);
     }
 
@@ -61,13 +59,26 @@ public class MarksService {
         }
     }
 
-    public List<Mark> getMarksForUser(User user) {
-        List<Mark> marks = new ArrayList<Mark>();
+    public Page<Mark> getMarksForUser(Pageable pageable, User user) {
+        Page<Mark> marks = new PageImpl<Mark>(new LinkedList<Mark>());
         if (user.getRole().equals("ROLE_STUDENT")) {
-            marks = marksRepository.findAllByUser(user);
+            marks = marksRepository.findAllByUser(pageable,user);
         }
         if (user.getRole().equals("ROLE_PROFESSOR")) {
-            marks = getMarks();
+            marks = getMarks(pageable);
+        }
+        return marks;
+    }
+
+
+    public Page<Mark> searchMarksByDescriptionAndNameForUser(Pageable pageable, String searchText, User user) {
+        Page<Mark> marks = new PageImpl<Mark>(new LinkedList<Mark>());
+        searchText = "%"+searchText+"%";
+        if (user.getRole().equals("ROLE_STUDENT")) {
+            marks = marksRepository.searchByDescriptionNameAndUser(pageable, searchText, user);
+        }
+        if (user.getRole().equals("ROLE_PROFESSOR")) {
+            marks = marksRepository.searchByDescriptionAndName(pageable, searchText);
         }
         return marks;
     }
