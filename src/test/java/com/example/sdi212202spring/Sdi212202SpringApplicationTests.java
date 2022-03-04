@@ -1,12 +1,16 @@
 package com.example.sdi212202spring;
 
+import com.example.sdi212202spring.pageobjects.PO_HomeView;
 import com.example.sdi212202spring.pageobjects.PO_Properties;
 import com.example.sdi212202spring.util.SeleniumUtils;
 import org.junit.jupiter.api.*;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static com.example.sdi212202spring.pageobjects.PO_View.getTimeout;
 
@@ -49,32 +53,41 @@ class Sdi212202SpringApplicationTests {
 
     @Test
     @Order(1)
-    void Test1() {
+    void PR01A() {
 
-        //Cambiamos el idioma a Inglés
-        //PO_HomeView.changeLanguaje (driver, "btnEnglish"));
-        //Esperamos porque aparezca que aparezca el texto de bienvenida en inglés
-        //SeleniumUtils. waitLoadElementsBy(driver, "text", p.getString("welcome.message", PO_Properties.ENGLISH), getTimeout());
+        PO_HomeView.checkWelcomeToPage(driver, PO_Properties.getSPANISH());
+
     }
 
     @Test
     @Order(2)
-    void Test2() {
+    void PR01B() {
+
+        List<WebElement> welcomeMessageElement = PO_HomeView.getWelcomeMessageText(driver, PO_Properties.getSPANISH());
+        Assertions.assertEquals(welcomeMessageElement.get(0).getText(),
+                PO_HomeView.getP().getString("welcome.message", PO_Properties.getSPANISH()));
+
     }
 
+    //PR02. Opción de navegación. Pinchar en el enlace Registro en la página home
     @Test
     @Order(3)
-    void Test3() {
+    public void PR02() {
+        PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
     }
 
+    //PR03. Opción de navegación. Pinchar en el enlace Identifícate en la página home
     @Test
     @Order(4)
-    void Test4() {
+    public void PR03() {
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
     }
 
+    //PR04. Opción de navegación. Cambio de idioma de Español a Inglés y vuelta a Español
     @Test
     @Order(5)
-    void Test5() {
+    public void PR04() {
+        PO_HomeView.checkChangeLanguage(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
     }
 
     @Test
