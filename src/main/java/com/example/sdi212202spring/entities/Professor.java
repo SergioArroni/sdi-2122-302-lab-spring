@@ -11,19 +11,19 @@ public class Professor {
     @GeneratedValue
     private Long id;
     private String dni;
-    private String Nombre;
-    private String Apellidos;
-    private String Categoría;
+    private String name;
+    private String surname;
+    private String category;
 
     public Professor() {
     }
 
-    public Professor(Long id, String dni, String Nombre, String Apellidos, String Categoría) {
+    public Professor(Long id, String dni, String name, String surname, String category) {
         this.id = id;
         this.dni = dni;
-        this.Nombre = Nombre;
-        this.Apellidos = Apellidos;
-        this.Categoría = Categoría;
+        this.name = name;
+        this.surname = surname;
+        this.category = category;
     }
 
     public Long getId() {
@@ -38,42 +38,43 @@ public class Professor {
         return dni;
     }
 
-    public String getNombre() {
-        return Nombre;
-    }
-
-    public String getApellidos() {
-        return Apellidos;
-    }
-
-    public String getCategoría() {
-        return Categoría;
-    }
-
     public void setDni(String dni) {
-        dni = dni;
+        this.dni = dni;
     }
 
-    public void setNombre(String nombre) {
-        Nombre = nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setApellidos(String apellidos) {
-        Apellidos = apellidos;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setCategoría(String categoría) {
-        Categoría = categoría;
+    public String getSurname() {
+        return surname;
     }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 
     @Override
     public String toString() {
         return "Professor{" +
                 "id=" + id +
-                ", Dni='" + dni + '\'' +
-                ", Nombre='" + Nombre + '\'' +
-                ", Apellidos='" + Apellidos + '\'' +
-                ", Categoría='" + Categoría + '\'' +
+                ", dni='" + dni + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", category='" + category + '\'' +
                 '}';
     }
 }

@@ -30,13 +30,15 @@
                         <a class="dropdown-item" href="/user/list">Ver usuarios</a>
                     </div>
                 </li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')" id="professor-menu" class="nav-item dropdown"><a
-                        class="nav-link dropdown-toggle" href="#" id="profesorDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Gestión de profesores
+                <li id="professor-menu" class="nav-item dropdown active"><a class="nav-link dropdown-toggle" href="#"
+                                                                        id="professorDropdown" role="button"
+                                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                                        aria-expanded="false"> Gestión de Profesrores
                 </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown"><a class="dropdown-item"
-                                                                                   href="/professor/list">Ver
-                        profesores</a>
+                                                                                   href="/professor/add"
+                                                                                   sec:authorize="hasRole('ROLE_ADMIN')">Agregar
+                        Profesor</a> <a class="dropdown-item" href="/professor/list">Ver Profesores</a>
                     </div>
                 </li>
             </ul>
