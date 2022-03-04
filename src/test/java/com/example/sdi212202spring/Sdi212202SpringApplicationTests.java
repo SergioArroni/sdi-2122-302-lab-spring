@@ -1,10 +1,14 @@
 package com.example.sdi212202spring;
 
+import com.example.sdi212202spring.pageobjects.PO_Properties;
+import com.example.sdi212202spring.util.SeleniumUtils;
 import org.junit.jupiter.api.*;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import static com.example.sdi212202spring.pageobjects.PO_View.getTimeout;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -46,6 +50,10 @@ class Sdi212202SpringApplicationTests {
     @Test
     @Order(1)
     void Test1() {
+        //Cambiamos el idioma a Inglés
+        PO_HomeView.changeLanguaje (driver, "btnEnglish"));
+        //Esperamos porque aparezca que aparezca el texto de bienvenida en inglés
+        SeleniumUtils. waitLoadElementsBy(driver, "text", p.getString("welcome.message", PO_Properties.ENGLISH), getTimeout());
     }
 
     @Test
