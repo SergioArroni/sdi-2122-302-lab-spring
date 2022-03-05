@@ -1,9 +1,6 @@
 package com.example.sdi212202spring;
 
-import com.example.sdi212202spring.pageobjects.PO_HomeView;
-import com.example.sdi212202spring.pageobjects.PO_Properties;
-import com.example.sdi212202spring.pageobjects.PO_SignUpView;
-import com.example.sdi212202spring.pageobjects.PO_View;
+import com.example.sdi212202spring.pageobjects.*;
 import com.example.sdi212202spring.util.SeleniumUtils;
 import org.junit.jupiter.api.*;
 
@@ -129,17 +126,67 @@ class Sdi212202SpringApplicationTests {
     }
 
     @Test
-    @Order(7)
-    void Test7() {
+    @Order(9)
+    void PR07() {
+        //Vamos al formulario de logueo.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); //Rellenamos el formulario
+        PO_LoginView.fillLoginForm(driver, "99999990A", "123456"); //Comprobamos que entramos en la pagina privada de Alumno
+        String checkText = "Notas del usuario";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
     }
 
     @Test
-    @Order(8)
+    @Order(10)
+    void PR08() {
+        //Vamos al formulario de logueo.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); //Rellenamos el formulario
+        PO_LoginView.fillLoginForm(driver, "99999993D", "123456"); //Comprobamos que entramos en la pagina privada de Alumno
+        String checkText = "Notas del usuario";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
+
+    @Test
+    @Order(11)
+    void PR09() {
+        //Vamos al formulario de logueo.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); //Rellenamos el formulario
+        PO_LoginView.fillLoginForm(driver, "99999988F", "123456"); //Comprobamos que entramos en la pagina privada de Alumno
+        String checkText = "Notas del usuario";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
+
+    @Test
+    @Order(12)
+    void PR010() {
+        //Vamos al formulario de logueo.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); //Rellenamos el formulario
+        PO_LoginView.fillLoginForm(driver, "99999990A", "123456"); //Comprobamos que entramos en la pagina privada de Alumno
+        String checkText = "Notas del usuario";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
+
+    @Test
+    @Order(13)
+    void PR011() {
+        //Vamos al formulario de logueo.
+        PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary"); //Rellenamos el formulario
+        PO_LoginView.fillLoginForm(driver, "99999990A", "123456"); //Comprobamos que entramos en la pagina privada de Alumno
+        String checkText = "Notas del usuario";
+        List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
+        Assertions.assertEquals(checkText, result.get(0).getText());
+    }
+
+    @Test
+    @Order(14)
     void Test8() {
     }
 
     @Test
-    @Order(9)
+    @Order(15)
     void Test9() {
     }
 
