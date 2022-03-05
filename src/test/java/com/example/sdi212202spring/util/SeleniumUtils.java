@@ -63,7 +63,8 @@ public class SeleniumUtils {
 		WebElement result =
 				(new WebDriverWait(driver, timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 		Assertions.assertNotNull(result);
-		return driver.findElements(By.xpath(xpath));
+		var s = driver.findElements(By.xpath(xpath));
+		return s;
 	}
 
 	/**
