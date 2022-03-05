@@ -51,7 +51,7 @@ class Sdi212202SpringApplicationTests {
     static public void begin() {
     } //Al finalizar la última prueba @AfterAll static public void end() { //Cerramos el navegador al finalizar las pruebas driver.quit();
 
-
+/**
     @Test
     @Order(1)
     void PR01A() {
@@ -180,7 +180,7 @@ class Sdi212202SpringApplicationTests {
         List<WebElement> result = PO_View.checkElementBy(driver, "text", checkText);
         Assertions.assertEquals(checkText, result.get(0).getText());
     }
-
+*/
     //PR12. Loguearse, comprobar que se visualizan 4 filas de notas y desconectarse usando el rol de estudiante
     @Test
     @Order(14)

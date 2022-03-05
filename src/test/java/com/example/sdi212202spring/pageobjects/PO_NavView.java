@@ -15,7 +15,8 @@ public class PO_NavView extends PO_View {
      * tipo type con el texto Destino * @param driver: apuntando al navegador abierto actualmente. * @param textOption: Texto de la opción principal. * @param criterio: "id" or "class" or "text" or "@attribute" or "free". Si el valor de criterio es free es una
      * expresion xpath completa. * @param targetText: texto correspondiente a la búsqueda de la página destino.
      */
-    public static void clickOption(WebDriver driver, String textOption, String criterio, String targetText) { //CLickamos en la opción de registro y esperamos a que se cargue el enlace de Registro.
+    public static void clickOption(WebDriver driver, String textOption, String criterio, String targetText) {
+        //CLickamos en la opción de registro y esperamos a que se cargue el enlace de Registro.
         List<WebElement> elements = SeleniumUtils.waitLoadElementsBy(driver, "@href", textOption,
                 getTimeout()); //Tiene que haber un sólo elemento.
         Assertions.assertEquals(1, elements.size()); //Ahora lo clickamos
